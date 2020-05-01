@@ -5,23 +5,33 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
-import java.util.function.Consumer;
 
 public class MainActivity extends AppCompatActivity {
     LocalBroadCastManager bus = LocalBroadCastManager.getInstance();
-    Consumer<String> consumer;
+    LocalConsumer l;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        consumer = s -> System.out.println("String: Activity1 ::" + s);
-        bus.subscribe(String.class, consumer);
-        bus.publish("Activity1");
-        LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent());
 
+
+        l = new LocalConsumer() {
+            @Override
+            public void accept(String event, Object data) {
+                Log.d("DEENA", "accept: "+event);
+                if (event.equals(LocalBroadCastManager.EVENT1)) {
+
+                }
+            }
+        };
+
+        bus.subscribe(LocalBroadCastManager.EVENT1, l);
+        bus.subscribe(LocalBroadCastManager.EVENT2, l);
+        bus.publish(LocalBroadCastManager.EVENT1);
     }
 
     public void click(View view) {
@@ -31,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        bus.unsubscribe(consumer);
+        bus.unsubscribe(l);
     }
+}
+
+interface LocalConsumer {
+    void accept(String event, Object data);
 }

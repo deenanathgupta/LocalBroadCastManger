@@ -3,6 +3,7 @@ package com.android.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 public class Main2Activity extends AppCompatActivity {
     LocalBroadCastManager bus = LocalBroadCastManager.getInstance();
@@ -11,12 +12,17 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        bus.subscribe(String.class, s -> System.out.println("String: Activity2::" + s));
+        bus.subscribe(LocalBroadCastManager.EVENT2, new LocalConsumer() {
+            @Override
+            public void accept(String event, Object data) {
+                Log.d("DEENA", "accept: Activity2"+event);
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        bus.publish("Activity2");
+        bus.publish(LocalBroadCastManager.EVENT2);
     }
 }
