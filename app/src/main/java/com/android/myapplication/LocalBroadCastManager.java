@@ -19,15 +19,15 @@ import java.util.function.Consumer;
  * using an event type hierarchy.
  * <p>
  * You can use the default event bus instance {@link #getInstance}, which is a singleton or you can create one or multiple
- * instances of {@link EventBus}.
+ * instances of {@link LocalBroadCastManager}.
  */
-public class EventBus {
+public class LocalBroadCastManager {
 
-    private static EventBus INSTANCE;
+    private static LocalBroadCastManager INSTANCE;
 
     private final Map<Class<?>, Set<Consumer>> subscribers = new ConcurrentHashMap<>();
 
-    private EventBus() {
+    private LocalBroadCastManager() {
     }
 
     /**
@@ -35,11 +35,11 @@ public class EventBus {
      *
      * @return the only instance of the default event bus.
      */
-    public static EventBus getInstance() {
+    public static LocalBroadCastManager getInstance() {
         if (INSTANCE == null) {
-            synchronized (EventBus.class) {
+            synchronized (LocalBroadCastManager.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new EventBus();
+                    INSTANCE = new LocalBroadCastManager();
                 }
             }
         }

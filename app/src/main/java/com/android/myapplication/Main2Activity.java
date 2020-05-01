@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class Main2Activity extends AppCompatActivity {
-    EventBus bus = EventBus.getInstance();
+    LocalBroadCastManager bus = LocalBroadCastManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -8,7 +8,7 @@ package com.android.myapplication;
 public class EventBusExample {
 
     public void usage() {
-        EventBus bus = EventBus.getInstance();
+        LocalBroadCastManager bus = LocalBroadCastManager.getInstance();
 
         bus.subscribe(String.class, s -> System.out.println("String: " + s));
         bus.subscribe(Number.class, n -> System.out.println("Number: " + n));

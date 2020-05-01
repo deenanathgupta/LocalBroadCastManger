@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
  * <p>
  * Not enough stuff to separate it.
  */
-public class EventBusTest {
+public class LocalBroadCastManagerTest {
 
     private List<String> stringEvents = new ArrayList<>();
     private List<Integer> integerEvents = new ArrayList<>();
@@ -44,38 +44,38 @@ public class EventBusTest {
 
     @Test(expected = NullPointerException.class)
     public void subscribe_EventTypeNull() {
-        EventBus bus = EventBus.getInstance();
+        LocalBroadCastManager bus = LocalBroadCastManager.getInstance();
         bus.subscribe(null, this::consumeString);
     }
 
     @Test(expected = NullPointerException.class)
     public void subscribe_SubscriberNull() {
-        EventBus bus = EventBus.getInstance();
+        LocalBroadCastManager bus = LocalBroadCastManager.getInstance();
         bus.subscribe(String.class, null);
     }
 
     @Test(expected = NullPointerException.class)
     public void unsubscribe_EventTypeNull() {
-        EventBus bus = EventBus.getInstance();
+        LocalBroadCastManager bus = LocalBroadCastManager.getInstance();
         bus.unsubscribe(null, this::consumeString);
     }
 
     @Test(expected = NullPointerException.class)
     public void unsubscribe_SubscriberNull() {
-        EventBus bus = EventBus.getInstance();
+        LocalBroadCastManager bus = LocalBroadCastManager.getInstance();
         bus.unsubscribe(null);
     }
 
     @Test(expected = NullPointerException.class)
     public void publish_EventNull() {
-        EventBus bus = EventBus.getInstance();
+        LocalBroadCastManager bus = LocalBroadCastManager.getInstance();
 
         bus.publish(null);
     }
 
     @Test
     public void publish() {
-        EventBus bus = EventBus.getInstance();
+        LocalBroadCastManager bus = LocalBroadCastManager.getInstance();
         bus.subscribe(String.class, this::consumeString);
         bus.subscribe(Integer.class, this::consumeInt);
 
@@ -89,7 +89,7 @@ public class EventBusTest {
 
     @Test
     public void unsubscribe() {
-        EventBus bus = EventBus.getInstance();
+        LocalBroadCastManager bus = LocalBroadCastManager.getInstance();
         Consumer<String> subscriber = this::consumeString;
         bus.subscribe(String.class, subscriber);
 
@@ -102,7 +102,7 @@ public class EventBusTest {
 
     @Test
     public void eventTypeHierarchy() {
-        EventBus bus = EventBus.getInstance();
+        LocalBroadCastManager bus = LocalBroadCastManager.getInstance();
         Consumer<Integer> intSubscriber = this::consumeInt;
         bus.subscribe(Integer.class, intSubscriber);
         Consumer<Number> numberSubscriber = this::consumeNumber;

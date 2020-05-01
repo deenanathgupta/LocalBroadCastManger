@@ -9,7 +9,7 @@ import android.view.View;
 import java.util.function.Consumer;
 
 public class MainActivity extends AppCompatActivity {
-    EventBus bus = EventBus.getInstance();
+    LocalBroadCastManager bus = LocalBroadCastManager.getInstance();
     Consumer<String> consumer;
 
     @Override
@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         bus.unsubscribe(consumer);
     }
 }
