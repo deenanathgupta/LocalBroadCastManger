@@ -1,6 +1,7 @@
 package com.android.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         consumer = s -> System.out.println("String: Activity1 ::" + s);
         bus.subscribe(String.class, consumer);
         bus.publish("Activity1");
-
+        LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent());
 
     }
 
