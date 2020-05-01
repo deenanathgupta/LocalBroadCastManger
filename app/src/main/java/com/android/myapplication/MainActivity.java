@@ -1,7 +1,6 @@
 package com.android.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
         bus.subscribe(LocalBroadCastManager.EVENT1, l);
         bus.subscribe(LocalBroadCastManager.EVENT2, l);
-        bus.publish(LocalBroadCastManager.EVENT1);
     }
 
     public void click(View view) {
